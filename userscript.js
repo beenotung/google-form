@@ -57,13 +57,12 @@ function findSections() {
 function findSectionDescription(section) {
   let { container, result } = findInParent(
     (container) =>
-      container
-        .querySelector('[aria-label="Description (optional)"]')
-        ?.innerText.trim(),
+      container.querySelector('[aria-label="Description (optional)"]') ||
+      container.querySelector('[aria-label="Form description"]'),
     section.container,
   );
   section.container = container;
-  return result;
+  return result.innerText.trim();
 }
 
 function findQuestions(sectionContainer) {
@@ -93,16 +92,15 @@ function findQuestionType(question) {
   return result;
 }
 
-function findInParent(fn, container) {
+function findInParent(fn, container, root) {
   for (;;) {
+    if (!container) break;
+    if (root && container == root) break;
     let result = fn(container);
     if (result) {
       return { container, result };
     }
     container = container.parentNode;
-    if (!container) {
-      return;
-    }
   }
 }
 
