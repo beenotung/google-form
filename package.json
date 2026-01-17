@@ -1,7 +1,7 @@
 {
   "name": "google-form",
   "version": "1.0.0",
-  "description": "",
+  "description": "Extract Google Form data to JSON.",
   "main": "userscript.js",
   "scripts": {
     "format": "prettier --write \"**/*.{js,json,md}\""
@@ -10,5 +10,15 @@
   "type": "commonjs",
   "devDependencies": {
     "prettier": "^3.7.4"
-  }
+  },
+  "author": "Beeno Tung <aabbcc1241@yahoo.com.hk> (https://beeno-tung.surge.sh)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/google-form.git"
+  },
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/beenotung/google-form/issues"
+  },
+  "homepage": "https://github.com/beenotung/google-form#readme"
 }
