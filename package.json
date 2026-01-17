@@ -1,0 +1,14 @@
+{
+  "name": "google-form",
+  "version": "1.0.0",
+  "description": "",
+  "main": "userscript.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,json,md}\""
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "prettier": "^3.7.4"
+  }
+}
