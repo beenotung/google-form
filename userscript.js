@@ -47,10 +47,23 @@ function findSections() {
     let title = section.container.querySelector(
       '[aria-label="Section title (optional)"]',
     )?.innerText;
+    let description = findSectionDescription(section);
     let questions = findQuestions(section.container);
-    Object.assign(section, { counter, title, questions });
+    Object.assign(section, { counter, title, description, questions });
   }
   return sections;
+}
+
+function findSectionDescription(section) {
+  let { container, result } = findInParent(
+    (container) =>
+      container
+        .querySelector('[aria-label="Description (optional)"]')
+        ?.innerText.trim(),
+    section.container,
+  );
+  section.container = container;
+  return result;
 }
 
 function findQuestions(sectionContainer) {
@@ -60,11 +73,7 @@ function findQuestions(sectionContainer) {
   );
   for (let question of questions) {
     let title = question.matchedNode.innerText;
-    let type = findQuestionType(question.container);
-    while (!type) {
-      question.container = question.container.parentNode;
-      type = findQuestionType(question.container);
-    }
+    let type = findQuestionType(question);
     let description = findDescription(question.container);
     let options = findOptions(question.container);
     Object.assign(question, { title, description, type, options });
@@ -72,11 +81,29 @@ function findQuestions(sectionContainer) {
   return questions;
 }
 
-function findQuestionType(container) {
-  let text = container
-    .querySelector('[aria-label="Question types"] [aria-selected="true"]')
-    ?.innerText.trim();
-  return text;
+function findQuestionType(question) {
+  let { container, result } = findInParent(
+    (container) =>
+      container
+        .querySelector('[aria-label="Question types"] [aria-selected="true"]')
+        ?.innerText.trim(),
+    question.container,
+  );
+  question.container = container;
+  return result;
+}
+
+function findInParent(fn, container) {
+  for (;;) {
+    let result = fn(container);
+    if (result) {
+      return { container, result };
+    }
+    container = container.parentNode;
+    if (!container) {
+      return;
+    }
+  }
 }
 
 function findDescription(container) {
