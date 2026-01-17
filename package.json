@@ -1,7 +1,7 @@
 {
   "name": "google-form",
   "version": "1.0.0",
-  "description": "Extract Google Form data to JSON.",
+  "description": "Extract Google Form questions to JSON.",
   "main": "userscript.js",
   "scripts": {
     "format": "prettier --write \"**/*.{js,json,md}\""

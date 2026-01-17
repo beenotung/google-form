@@ -1,6 +1,6 @@
 # google-form
 
-Extract Google Form data to JSON.
+Extract Google Form questions to JSON.
 
 ## Usage
 
